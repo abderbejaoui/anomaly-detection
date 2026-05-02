@@ -5,12 +5,16 @@ services:
       dockerfile: Dockerfile
     container_name: anomaly-detection
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       # Point to the key INSIDE the container; map the host file to the same path via volumes
       EE_SERVICE_ACCOUNT_KEY: ${EE_SERVICE_ACCOUNT_KEY:-/secrets/gee-key.json}
       EE_PROJECT_ID: ${EE_PROJECT_ID:-}
       ENVIRONMENT: ${ENVIRONMENT:-production}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      SEED_ON_START: ${SEED_ON_START:-true}
+      TRAIN_ON_START: ${TRAIN_ON_START:-false}
     ports:
       - "${PORT:-8000}:8000"
     volumes:
@@ -26,6 +30,25 @@ services:
       timeout: 5s
       retries: 3
 
+  trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: anomaly-trainer
+    profiles: ["tools"]
+    env_file:
+      - .env
+    environment:
+      EE_SERVICE_ACCOUNT_KEY: ${EE_SERVICE_ACCOUNT_KEY:-/secrets/gee-key.json}
+      EE_PROJECT_ID: ${EE_PROJECT_ID:-}
+    command: ["sh", "-lc", "python -m scripts.load_parcels && python -m scripts.refresh_all"]
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./history:/app/history
+      - ${GEE_KEY_HOST_PATH:-./gee-key.json}:/secrets/gee-key.json:ro
+    # No ports; this is a one-shot job
+    restart: "no"
 networks:
   default:
     driver: bridge

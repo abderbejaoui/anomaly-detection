@@ -62,6 +62,16 @@ app.add_middleware(
 )
 
 
+# Ensure SQLite schema exists on startup so first requests don't fail on fresh volumes.
+@app.on_event("startup")
+def _init_sqlite_schema() -> None:
+    try:
+        db.init_schema(db.DEFAULT_DB_PATH)
+        log.info("SQLite schema initialized at %s", db.DEFAULT_DB_PATH)
+    except Exception as e:
+        log.warning("DB init failed: %s", e)
+
+
 _executor = ThreadPoolExecutor(max_workers=4)
 
 
