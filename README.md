@@ -30,7 +30,8 @@ python test_ee.py
 # 2. Charger les 49 parcelles dans SQLite
 python -m scripts.load_parcels
 
-# 3. Entraîner tous les modèles (5 ans d'historique chacun, ~25-40 min)
+# 3. (Optionnel) Ré-entraîner les modèles — les fichiers `models/*.joblib` sont déjà dans le dépôt,
+#    dont `_global.joblib` pour le diagnostic jury sans parcelle connue. Lancez seulement pour régénérer :
 python -m scripts.refresh_all
 ```
 

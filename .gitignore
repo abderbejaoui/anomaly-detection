@@ -21,5 +21,4 @@ data/parcels.db-journal
 data/parcels.db-shm
 data/parcels.db-wal
 history/
-models/*.joblib
-!models/.gitkeep
+# Trained Ridge artifacts are committed so clones work without running refresh_all.
