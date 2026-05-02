@@ -19,7 +19,8 @@ COPY . .
 
 # Startup script to seed DB then launch the API
 COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+# Normalize line endings to LF to avoid /bin/sh^M issues on Windows hosts
+RUN sed -i 's/\r$//' /app/start.sh && chmod +x /app/start.sh
 
 # Create non-root user
 RUN useradd -m appuser && chown -R appuser:appuser /app
