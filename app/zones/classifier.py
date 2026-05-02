@@ -102,11 +102,20 @@ def classify_polygon(
     image_bytes: Optional[bytes] = None,
     grid_n: int = _GRID_N,
 ) -> dict[str, Any]:
-    """Run the (mock) classifier and return a colorised GeoJSON FeatureCollection.
+    """Classify a polygon into colored zones.
 
-    `image_bytes` is accepted but ignored by the mock implementation; it is
-    plumbed through so the real CNN can drop in without changing the caller.
+    When the Hugging Face model is configured (`OLIVE_CNN_HF_REPO`,
+    `OLIVE_CNN_FILENAME`, `OLIVE_CNN_CLASSES` set in env) AND a
+    Sentinel-2 preview is available in `image_bytes`, each grid patch
+    is scored by the CNN. Otherwise — or on any failure during
+    download / load / inference — we fall back to the deterministic
+    mock so the demo always produces a result.
     """
+    # Late import to keep the mock path dependency-free.
+    from . import model as _zone_model  # noqa: WPS433
+
+    use_real_model = bool(image_bytes) and _zone_model.is_available()
+
     poly = _polygon_from_geojson(polygon_geojson)
     if poly.is_empty:
         return {
@@ -148,11 +157,33 @@ def classify_polygon(
             if patch.is_empty or patch.area <= 0:
                 continue
 
-            r1 = _seed(*base_seed, "cls", i, j)
-            cls = _pick_class(r1)
+            cls: Optional[str] = None
+            confidence: Optional[float] = None
 
-            r2 = _seed(*base_seed, "conf", i, j)
-            confidence = round(0.70 + 0.29 * r2, 2)  # 0.70 - 0.99
+            if use_real_model:
+                # Map the grid cell into normalised image coords. The
+                # Sentinel-2 preview was rendered for the polygon bbox,
+                # so cell (i, j) sits at fractional bbox offset
+                # (i/N, j/N) → ((i+1)/N, (j+1)/N). PIL uses top-left
+                # origin so we flip the y axis.
+                left = i / grid_n
+                right = (i + 1) / grid_n
+                upper = 1.0 - (j + 1) / grid_n
+                lower = 1.0 - j / grid_n
+                pred = _zone_model.predict_patch(
+                    image_bytes,  # type: ignore[arg-type]
+                    (left, upper, right, lower),
+                )
+                if pred is not None:
+                    cls, confidence = pred
+
+            if cls is None:
+                r1 = _seed(*base_seed, "cls", i, j)
+                cls = _pick_class(r1)
+                r2 = _seed(*base_seed, "conf", i, j)
+                confidence = round(0.70 + 0.29 * r2, 2)  # 0.70 - 0.99
+            else:
+                confidence = round(float(confidence or 0.0), 2)
 
             surface_ha = round(_haversine_area_ha(patch), 2)
             total_area += surface_ha

@@ -13,3 +13,15 @@ python-dateutil>=2.8.0
 jinja2>=3.1.0
 pytest>=8.0.0
 python-dotenv>=1.0.0
+
+# Olive zone classifier (POST /api/analyze).
+# Pillow + huggingface-hub are always installed (small).
+# torch / torchvision (or tensorflow) are needed only when the real
+# Hugging Face model is configured via OLIVE_CNN_HF_REPO. When the env
+# vars are unset, the endpoint runs the deterministic mock and these
+# heavier imports are never triggered.
+Pillow>=10.0.0
+huggingface-hub>=0.20.0
+torch>=2.1.0
+torchvision>=0.16.0
+# tensorflow>=2.15.0  # uncomment if the published weights are .h5 / .keras

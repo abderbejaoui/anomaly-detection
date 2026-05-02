@@ -19,6 +19,7 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 
+from . import model as zone_model
 from . import sentinel
 from .classifier import classify_polygon
 from .schemas import AnalyzeRequest
@@ -47,12 +48,15 @@ def zones_page() -> Any:
 
 @router.get("/api/analyze/health")
 def analyze_health() -> dict[str, Any]:
+    model_status = zone_model.status()
+    classifier_mode = "model" if model_status.get("loaded") else "mock"
     return {
         "status": "ok",
         "sentinel_hub_configured": sentinel.has_credentials(),
         "hf_repo": os.getenv("OLIVE_CNN_HF_REPO", ""),
         "hf_filename": os.getenv("OLIVE_CNN_FILENAME", ""),
-        "classifier_mode": "mock",
+        "classifier_mode": classifier_mode,
+        "model": model_status,
     }
 
 
