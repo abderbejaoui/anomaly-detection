@@ -2,8 +2,12 @@
 
 import os
 import sys
+from pathlib import Path
 
 import ee
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 PROJECT_ID = os.environ.get("EE_PROJECT_ID", "anomalydetection-495112")
 KEY_PATH = os.environ.get(

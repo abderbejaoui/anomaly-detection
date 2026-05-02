@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EZZAYRA — Classification de zones (extensif / intensif)</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"
+  />
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --panel-2: #1f242c;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-dim: #8b949e;
+      --accent: #2f81f7;
+      --green: #22c55e;
+      --red: #ef4444;
+      --gray: #6b7280;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      font-size: 16px;
+      margin: 0;
+      font-weight: 600;
+    }
+    header .sub {
+      color: var(--text-dim);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+    header a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    header a:hover { text-decoration: underline; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      height: calc(100vh - 60px);
+    }
+    #map { width: 100%; height: 100%; }
+
+    .side {
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 16px;
+    }
+    .side h2 {
+      font-size: 14px;
+      margin: 0 0 8px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+    }
+
+    .controls label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 10px;
+    }
+    .controls input[type="date"] {
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+    .btn:hover { border-color: var(--accent); }
+    .btn--primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+    .btn--primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn--ghost {
+      background: transparent;
+    }
+
+    .legend {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .legend__row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+    }
+
+    .stats {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .stats__row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 4px 0;
+    }
+    .stats__row span:last-child { font-weight: 600; }
+
+    .features {
+      margin-top: 16px;
+    }
+    .feature-card {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .feature-card .cls {
+      font-weight: 600;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .loading-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 24px 32px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 12px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Classification de zones — Oliveraies</h1>
+      <div class="sub">Dessinez un polygone · Sentinel-2 · classification extensif / intensif</div>
+    </div>
+    <a href="/">← Tableau de bord anomalies</a>
+  </header>
+
+  <div class="layout">
+    <div id="map"></div>
+
+    <aside class="side">
+      <div class="controls">
+        <h2>Paramètres</h2>
+        <label>Date (image Sentinel-2)
+          <input type="date" id="input-date" />
+        </label>
+        <button id="btn-draw" class="btn btn--primary">+ Dessiner un polygone</button>
+        <button id="btn-clear" class="btn btn--ghost">Effacer</button>
+        <p class="hint">Astuce : zoomez d'abord sur la zone à analyser, puis cliquez sur « Dessiner ».</p>
+      </div>
+
+      <div class="legend">
+        <h2>Légende</h2>
+        <div class="legend__row"><span class="swatch" style="background:#22c55e"></span> Extensif</div>
+        <div class="legend__row"><span class="swatch" style="background:#ef4444"></span> Intensif</div>
+        <div class="legend__row"><span class="swatch" style="background:#6b7280"></span> Non-olivier</div>
+      </div>
+
+      <div class="stats" id="stats" style="display:none">
+        <h2>Résultats</h2>
+        <div class="stats__row"><span>Zones totales</span><span id="stat-total">—</span></div>
+        <div class="stats__row"><span>Extensif</span><span id="stat-ext">—</span></div>
+        <div class="stats__row"><span>Intensif</span><span id="stat-int">—</span></div>
+        <div class="stats__row"><span>Non-olivier</span><span id="stat-no">—</span></div>
+        <div class="stats__row"><span>Surface totale</span><span id="stat-area">—</span></div>
+      </div>
+
+      <div class="features" id="features"></div>
+    </aside>
+  </div>
+
+  <div id="loading" class="loading-overlay" style="display:none">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <p id="loading-text">Analyse en cours…</p>
+    </div>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const map = L.map("map", { zoomControl: true }).setView([36.5, 10.75], 11);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap",
+        maxZoom: 19,
+      }).addTo(map);
+
+      const drawnLayer = L.featureGroup().addTo(map);
+      const resultLayer = L.featureGroup().addTo(map);
+
+      // Default date = today
+      document.getElementById("input-date").valueAsDate = new Date();
+
+      const drawControl = new L.Draw.Polygon(map, {
+        shapeOptions: { color: "#2f81f7", weight: 3 },
+        allowIntersection: false,
+        showArea: false,
+      });
+
+      document.getElementById("btn-draw").addEventListener("click", () => {
+        clearAll();
+        drawControl.enable();
+      });
+
+      document.getElementById("btn-clear").addEventListener("click", clearAll);
+
+      function clearAll() {
+        drawnLayer.clearLayers();
+        resultLayer.clearLayers();
+        document.getElementById("stats").style.display = "none";
+        document.getElementById("features").innerHTML = "";
+      }
+
+      map.on(L.Draw.Event.CREATED, async (e) => {
+        const layer = e.layer;
+        drawnLayer.addLayer(layer);
+        const geojson = layer.toGeoJSON().geometry;
+
+        const dateValue = document.getElementById("input-date").value;
+        await runAnalyze(geojson, dateValue);
+      });
+
+      async function runAnalyze(polygon, dateStr) {
+        const loading = document.getElementById("loading");
+        loading.style.display = "flex";
+        try {
+          const body = { polygon };
+          if (dateStr) body.date = dateStr;
+          const resp = await fetch("/api/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          if (!resp.ok) {
+            const err = await resp.text();
+            throw new Error(`HTTP ${resp.status}: ${err}`);
+          }
+          const data = await resp.json();
+          renderResult(data);
+        } catch (err) {
+          alert("Échec de l'analyse: " + err.message);
+        } finally {
+          loading.style.display = "none";
+        }
+      }
+
+      function renderResult(fc) {
+        resultLayer.clearLayers();
+
+        L.geoJSON(fc, {
+          style: (feature) => ({
+            color: feature.properties.color,
+            weight: 1,
+            fillColor: feature.properties.color,
+            fillOpacity: 0.55,
+          }),
+          onEachFeature: (feature, layer) => {
+            const p = feature.properties;
+            layer.bindPopup(
+              `<div><strong>${p.class}</strong></div>` +
+              `<div>Confiance : ${(p.confidence * 100).toFixed(0)}%</div>` +
+              `<div>Surface : ${p.surface_ha} ha</div>`
+            );
+          },
+        }).addTo(resultLayer);
+
+        try { map.fitBounds(resultLayer.getBounds(), { padding: [20, 20] }); } catch (e) {}
+
+        const s = fc.stats || {};
+        document.getElementById("stats").style.display = "block";
+        document.getElementById("stat-total").textContent = s.total_patches ?? 0;
+        document.getElementById("stat-ext").textContent = s.extensif ?? 0;
+        document.getElementById("stat-int").textContent = s.intensif ?? 0;
+        document.getElementById("stat-no").textContent = s.not_olive ?? 0;
+        document.getElementById("stat-area").textContent =
+          (s.surface_totale_ha ?? 0).toFixed(2) + " ha";
+
+        const list = document.getElementById("features");
+        list.innerHTML = "";
+        (fc.features || []).forEach((f, idx) => {
+          const card = document.createElement("div");
+          card.className = "feature-card";
+          card.innerHTML =
+            `<span class="cls" style="color:${f.properties.color}">` +
+            `${idx + 1}. ${f.properties.class}</span>` +
+            `<span>${f.properties.surface_ha} ha · ` +
+            `${(f.properties.confidence * 100).toFixed(0)}%</span>`;
+          list.appendChild(card);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

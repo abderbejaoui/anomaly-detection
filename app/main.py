@@ -36,6 +36,7 @@ from .schemas import (
     ParcelListItem,
 )
 from .train import TrainedModel
+from .zones import router as zones_router
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +61,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Olive zone classification feature (POST /api/analyze + GET /zones).
+# Lives in app/zones/* and is fully decoupled from the EZZAYRA pipeline above.
+app.include_router(zones_router)
 
 
 # Ensure SQLite schema exists on startup so first requests don't fail on fresh volumes.

@@ -7,6 +7,9 @@ import os
 from pathlib import Path
 
 import ee
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 _INITIALIZED = False
 
