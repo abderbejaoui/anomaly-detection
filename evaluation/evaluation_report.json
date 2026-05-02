@@ -1,0 +1,550 @@
+{
+  "test1_temporal_holdout": {
+    "summary": {
+      "n_parcels_evaluated": 49,
+      "r2_mean": 0.09556940080782263,
+      "r2_median": 0.3606716875942786,
+      "r2_min": -5.2240273297164626,
+      "r2_max": 0.748900681503528,
+      "rmse_mean": 0.04274598850191993,
+      "rmse_median": 0.028734311778545386,
+      "mae_mean": 0.03263200581079472
+    },
+    "per_parcel": [
+      {
+        "parcel_id": "parcel_1777662049508_exj14",
+        "system": "intensif",
+        "n_train": 447,
+        "n_test": 79,
+        "r2": 0.601304703606883,
+        "rmse": 0.09982827379194509,
+        "mae": 0.07221127095938232
+      },
+      {
+        "parcel_id": "parcel_1777662108262_dhxlg",
+        "system": "intensif",
+        "n_train": 466,
+        "n_test": 81,
+        "r2": 0.6088329474089541,
+        "rmse": 0.07061852501048245,
+        "mae": 0.05196459930400027
+      },
+      {
+        "parcel_id": "parcel_1777662148660_qey6r",
+        "system": "intensif",
+        "n_train": 454,
+        "n_test": 79,
+        "r2": 0.6680229895104497,
+        "rmse": 0.06122644418302012,
+        "mae": 0.0433277784260307
+      },
+      {
+        "parcel_id": "parcel_1777662294718_3mzv8",
+        "system": "intensif",
+        "n_train": 248,
+        "n_test": 35,
+        "r2": 0.6762145835757964,
+        "rmse": 0.03839706158246762,
+        "mae": 0.029522986621734772
+      },
+      {
+        "parcel_id": "parcel_1777662316778_yiudt",
+        "system": "intensif",
+        "n_train": 241,
+        "n_test": 35,
+        "r2": 0.36610190703175094,
+        "rmse": 0.065067170924916,
+        "mae": 0.04868162829664992
+      },
+      {
+        "parcel_id": "parcel_1777662471199_933e1",
+        "system": "intensif",
+        "n_train": 244,
+        "n_test": 44,
+        "r2": 0.13043517473017818,
+        "rmse": 0.0863770649950763,
+        "mae": 0.06594644853778417
+      },
+      {
+        "parcel_id": "parcel_1777662498867_hce6r",
+        "system": "intensif",
+        "n_train": 241,
+        "n_test": 44,
+        "r2": 0.3025010983982186,
+        "rmse": 0.07846026185061601,
+        "mae": 0.06459135397893266
+      },
+      {
+        "parcel_id": "parcel_1777662509830_ph4tb",
+        "system": "intensif",
+        "n_train": 234,
+        "n_test": 43,
+        "r2": 0.25760307199130505,
+        "rmse": 0.07159589506247434,
+        "mae": 0.05517439490324058
+      },
+      {
+        "parcel_id": "parcel_1777662532453_yoau8",
+        "system": "intensif",
+        "n_train": 233,
+        "n_test": 44,
+        "r2": 0.28167892794625327,
+        "rmse": 0.07432371561390394,
+        "mae": 0.058773363811089975
+      },
+      {
+        "parcel_id": "parcel_1777662559509_oh30t",
+        "system": "intensif",
+        "n_train": 234,
+        "n_test": 42,
+        "r2": 0.3141615174697773,
+        "rmse": 0.0748732317313779,
+        "mae": 0.0545447098541033
+      },
+      {
+        "parcel_id": "parcel_1777662581023_xa3jy",
+        "system": "intensif",
+        "n_train": 236,
+        "n_test": 43,
+        "r2": 0.3863886290301636,
+        "rmse": 0.06183750613043774,
+        "mae": 0.048341601149833165
+      },
+      {
+        "parcel_id": "parcel_1777662650200_lx0g1",
+        "system": "intensif",
+        "n_train": 260,
+        "n_test": 46,
+        "r2": 0.3169092390935996,
+        "rmse": 0.06086705559651662,
+        "mae": 0.043995454135738264
+      },
+      {
+        "parcel_id": "parcel_1777662674673_x7v1z",
+        "system": "intensif",
+        "n_train": 253,
+        "n_test": 47,
+        "r2": 0.1382811751963784,
+        "rmse": 0.07744573396012618,
+        "mae": 0.06349107828256004
+      },
+      {
+        "parcel_id": "parcel_1777662687780_8zuuk",
+        "system": "intensif",
+        "n_train": 246,
+        "n_test": 45,
+        "r2": 0.7014142624602255,
+        "rmse": 0.052083417737802194,
+        "mae": 0.042346484685622215
+      },
+      {
+        "parcel_id": "parcel_1777662715410_fr6g1",
+        "system": "intensif",
+        "n_train": 252,
+        "n_test": 45,
+        "r2": -0.3485787109510874,
+        "rmse": 0.05865025199819511,
+        "mae": 0.04664176258913156
+      },
+      {
+        "parcel_id": "parcel_1777662875975_5jz1b",
+        "system": "intensif",
+        "n_train": 243,
+        "n_test": 37,
+        "r2": -0.29795550084079747,
+        "rmse": 0.010455583395006383,
+        "mae": 0.008269580803078713
+      },
+      {
+        "parcel_id": "parcel_1777662889381_5q9ie",
+        "system": "intensif",
+        "n_train": 449,
+        "n_test": 68,
+        "r2": -0.6968824525441593,
+        "rmse": 0.03930441073380927,
+        "mae": 0.03311813446647784
+      },
+      {
+        "parcel_id": "parcel_1777663020929_sz60j",
+        "system": "intensif",
+        "n_train": 242,
+        "n_test": 39,
+        "r2": -5.2240273297164626,
+        "rmse": 0.10915379294657603,
+        "mae": 0.09881751227246466
+      },
+      {
+        "parcel_id": "parcel_1777665966157_egeq5",
+        "system": "extensif",
+        "n_train": 229,
+        "n_test": 39,
+        "r2": 0.3235171318107197,
+        "rmse": 0.019515380149435706,
+        "mae": 0.012915834136883832
+      },
+      {
+        "parcel_id": "parcel_1777666032243_cm5hf",
+        "system": "extensif",
+        "n_train": 255,
+        "n_test": 43,
+        "r2": 0.07754457793673475,
+        "rmse": 0.028734311778545386,
+        "mae": 0.012102437068453657
+      },
+      {
+        "parcel_id": "parcel_1777666069829_t5ehp",
+        "system": "extensif",
+        "n_train": 256,
+        "n_test": 41,
+        "r2": 0.6533180178585671,
+        "rmse": 0.008764495092713933,
+        "mae": 0.006323419400140328
+      },
+      {
+        "parcel_id": "parcel_1777666096636_lo0y0",
+        "system": "extensif",
+        "n_train": 238,
+        "n_test": 40,
+        "r2": 0.6906404390670489,
+        "rmse": 0.0165310343405117,
+        "mae": 0.011721573892143417
+      },
+      {
+        "parcel_id": "parcel_1777666127269_tb54q",
+        "system": "extensif",
+        "n_train": 249,
+        "n_test": 40,
+        "r2": 0.4639355185535775,
+        "rmse": 0.014504030588773344,
+        "mae": 0.010429811134070191
+      },
+      {
+        "parcel_id": "parcel_1777666170696_fk7cq",
+        "system": "extensif",
+        "n_train": 253,
+        "n_test": 43,
+        "r2": 0.4582299054072888,
+        "rmse": 0.02635123556859013,
+        "mae": 0.018385468841504608
+      },
+      {
+        "parcel_id": "parcel_1777666196106_hhim9",
+        "system": "extensif",
+        "n_train": 248,
+        "n_test": 42,
+        "r2": 0.23293044070420688,
+        "rmse": 0.015018483440152936,
+        "mae": 0.011374306057587533
+      },
+      {
+        "parcel_id": "parcel_1777666217906_3lfgs",
+        "system": "extensif",
+        "n_train": 246,
+        "n_test": 42,
+        "r2": 0.5750988766386252,
+        "rmse": 0.012681982613409007,
+        "mae": 0.010602407071719281
+      },
+      {
+        "parcel_id": "parcel_1777666232428_43q5u",
+        "system": "extensif",
+        "n_train": 250,
+        "n_test": 42,
+        "r2": 0.748900681503528,
+        "rmse": 0.012589973028627905,
+        "mae": 0.009513424153015418
+      },
+      {
+        "parcel_id": "parcel_1777666247763_3i29v",
+        "system": "extensif",
+        "n_train": 244,
+        "n_test": 42,
+        "r2": 0.44224310926089117,
+        "rmse": 0.01846805843154166,
+        "mae": 0.014745622430649549
+      },
+      {
+        "parcel_id": "parcel_1777666273477_7e680",
+        "system": "extensif",
+        "n_train": 239,
+        "n_test": 42,
+        "r2": 0.3144586757384007,
+        "rmse": 0.01727769602423952,
+        "mae": 0.012814096733424181
+      },
+      {
+        "parcel_id": "parcel_1777666300643_1c2ue",
+        "system": "extensif",
+        "n_train": 245,
+        "n_test": 43,
+        "r2": 0.3091843758051539,
+        "rmse": 0.017386984420200167,
+        "mae": 0.012969711352547748
+      },
+      {
+        "parcel_id": "parcel_1777666340373_juajr",
+        "system": "extensif",
+        "n_train": 244,
+        "n_test": 42,
+        "r2": 0.29935969251703365,
+        "rmse": 0.018533986615495383,
+        "mae": 0.013671394060124473
+      },
+      {
+        "parcel_id": "parcel_1777666373384_lm2rb",
+        "system": "extensif",
+        "n_train": 254,
+        "n_test": 42,
+        "r2": 0.23315465500563148,
+        "rmse": 0.025165156471783502,
+        "mae": 0.017026127828775387
+      },
+      {
+        "parcel_id": "parcel_1777666392195_gp8ab",
+        "system": "extensif",
+        "n_train": 235,
+        "n_test": 40,
+        "r2": 0.5555473878399442,
+        "rmse": 0.010594497732449812,
+        "mae": 0.008012434589761301
+      },
+      {
+        "parcel_id": "parcel_1777666410382_4ozey",
+        "system": "extensif",
+        "n_train": 238,
+        "n_test": 41,
+        "r2": 0.3606716875942786,
+        "rmse": 0.01360068917653582,
+        "mae": 0.01033491240335371
+      },
+      {
+        "parcel_id": "parcel_1777666449437_wci0q",
+        "system": "extensif",
+        "n_train": 246,
+        "n_test": 41,
+        "r2": 0.31782654429318036,
+        "rmse": 0.016493194440491677,
+        "mae": 0.011988532972352918
+      },
+      {
+        "parcel_id": "parcel_1777666485645_8qagw",
+        "system": "extensif",
+        "n_train": 247,
+        "n_test": 42,
+        "r2": 0.5536643861242606,
+        "rmse": 0.01189527528828272,
+        "mae": 0.009487187257330968
+      },
+      {
+        "parcel_id": "parcel_1777666507054_wo1vk",
+        "system": "extensif",
+        "n_train": 246,
+        "n_test": 42,
+        "r2": 0.45611331516251086,
+        "rmse": 0.013102113962452602,
+        "mae": 0.01002282647840905
+      },
+      {
+        "parcel_id": "parcel_1777666529889_rdkq2",
+        "system": "extensif",
+        "n_train": 250,
+        "n_test": 42,
+        "r2": 0.658490800099507,
+        "rmse": 0.009501940612157594,
+        "mae": 0.0074444408637090054
+      },
+      {
+        "parcel_id": "parcel_1777666572107_7pdad",
+        "system": "extensif",
+        "n_train": 259,
+        "n_test": 41,
+        "r2": 0.5994626518666888,
+        "rmse": 0.010325635724204831,
+        "mae": 0.007639042104432017
+      },
+      {
+        "parcel_id": "parcel_1777666591451_o64cz",
+        "system": "extensif",
+        "n_train": 255,
+        "n_test": 41,
+        "r2": 0.5420505473751422,
+        "rmse": 0.012962531295566349,
+        "mae": 0.009762615037936663
+      },
+      {
+        "parcel_id": "parcel_1777666608727_pm8wx",
+        "system": "extensif",
+        "n_train": 249,
+        "n_test": 42,
+        "r2": 0.47363519499315676,
+        "rmse": 0.014475758210192664,
+        "mae": 0.011149762625171929
+      },
+      {
+        "parcel_id": "parcel_1777666827849_immef",
+        "system": "intensif",
+        "n_train": 259,
+        "n_test": 47,
+        "r2": -0.6200547545165791,
+        "rmse": 0.021973134693683175,
+        "mae": 0.01689081734285819
+      },
+      {
+        "parcel_id": "parcel_1777666990655_5k85g",
+        "system": "intensif",
+        "n_train": 485,
+        "n_test": 74,
+        "r2": -0.6892004248086299,
+        "rmse": 0.1196726198595755,
+        "mae": 0.09619872079664195
+      },
+      {
+        "parcel_id": "parcel_1777667140912_3xckb",
+        "system": "intensif",
+        "n_train": 250,
+        "n_test": 39,
+        "r2": -1.8508670283089663,
+        "rmse": 0.029112500869022753,
+        "mae": 0.026865596406428962
+      },
+      {
+        "parcel_id": "parcel_1777667155941_ci6fx",
+        "system": "intensif",
+        "n_train": 239,
+        "n_test": 38,
+        "r2": -2.5411441977230855,
+        "rmse": 0.07652289184961361,
+        "mae": 0.06453677719930088
+      },
+      {
+        "parcel_id": "parcel_1777667189888_bwda5",
+        "system": "intensif",
+        "n_train": 238,
+        "n_test": 38,
+        "r2": -0.6469845451013336,
+        "rmse": 0.047421979057077616,
+        "mae": 0.03963957479455984
+      },
+      {
+        "parcel_id": "parcel_1777667281825_3deuj",
+        "system": "intensif",
+        "n_train": 223,
+        "n_test": 40,
+        "r2": 0.4571883522910941,
+        "rmse": 0.08704316297509862,
+        "mae": 0.056100894257901865
+      },
+      {
+        "parcel_id": "parcel_1777667302238_zjnhu",
+        "system": "intensif",
+        "n_train": 216,
+        "n_test": 40,
+        "r2": 0.43868359948063496,
+        "rmse": 0.0750607816864382,
+        "mae": 0.0452204152368756
+      },
+      {
+        "parcel_id": "parcel_1777667330430_52762",
+        "system": "intensif",
+        "n_train": 218,
+        "n_test": 41,
+        "r2": 0.6128947917166705,
+        "rmse": 0.0827065233524631,
+        "mae": 0.06331795712302189
+      }
+    ]
+  },
+  "test2_drought_replay": {
+    "2020": {
+      "vert": 32,
+      "orange": 11,
+      "rouge": 6,
+      "skipped": 0
+    },
+    "2021": {
+      "vert": 45,
+      "orange": 4,
+      "rouge": 0,
+      "skipped": 0
+    },
+    "2022": {
+      "vert": 36,
+      "orange": 13,
+      "rouge": 0,
+      "skipped": 0
+    },
+    "2023": {
+      "vert": 47,
+      "orange": 2,
+      "rouge": 0,
+      "skipped": 0
+    },
+    "2024": {
+      "vert": 48,
+      "orange": 1,
+      "rouge": 0,
+      "skipped": 0
+    }
+  },
+  "test3_sensitivity_sweep": {
+    "reference_parcel": "parcel_1777662049508_exj14",
+    "rows": [
+      {
+        "drop": 0.0,
+        "score": 0.47885560319418335,
+        "statut": "vert"
+      },
+      {
+        "drop": 0.05,
+        "score": -0.022941146302585386,
+        "statut": "vert"
+      },
+      {
+        "drop": 0.1,
+        "score": -0.5247378957993545,
+        "statut": "vert"
+      },
+      {
+        "drop": 0.15,
+        "score": -1.026534645296123,
+        "statut": "orange"
+      },
+      {
+        "drop": 0.2,
+        "score": -1.528331394792892,
+        "statut": "rouge"
+      },
+      {
+        "drop": 0.25,
+        "score": -2.030128144289661,
+        "statut": "rouge"
+      },
+      {
+        "drop": 0.3,
+        "score": -2.4732651672358874,
+        "statut": "rouge"
+      },
+      {
+        "drop": 0.35,
+        "score": -2.6698125613069768,
+        "statut": "rouge"
+      },
+      {
+        "drop": 0.4,
+        "score": -2.7182967224807837,
+        "statut": "rouge"
+      }
+    ],
+    "first_orange_at_drop": 0.15,
+    "first_rouge_at_drop": 0.2,
+    "chart_path": "evaluation/sensitivity_curve.png"
+  },
+  "test4_spatial_clustering_2022": {
+    "year": 2022,
+    "n_flagged": 13,
+    "mean_nn_alerts_km": 11.093604174010194,
+    "mean_nn_random_km": 18.569693720428567,
+    "clustering_ratio": 0.597403723563092,
+    "p_value": 0.132
+  }
+}

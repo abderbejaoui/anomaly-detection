@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+
+# Credentials and secrets only
+**/service-account*.json
+**/credentials*.json
+*.key
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Local data caches
+data/parcels.db
+data/parcels.db-journal
+history/
+models/*.joblib
+!models/.gitkeep

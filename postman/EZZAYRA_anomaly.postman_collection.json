@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "EZZAYRA - Anomaly Detection",
+    "_postman_id": "ezzayra-anomaly-2026",
+    "description": "Cas de tests pour POST /api/diagnostic-anomalie : oliveraie connue, oliveraie inconnue (jury), zone hors olives.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8765" }
+  ],
+  "item": [
+    {
+      "name": "Health check",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{base_url}}/api/health", "host": ["{{base_url}}"], "path": ["api","health"] }
+      }
+    },
+    {
+      "name": "Toutes les parcelles (pour le dashboard)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{base_url}}/api/parcels", "host": ["{{base_url}}"], "path": ["api","parcels"] }
+      }
+    },
+    {
+      "name": "Diagnostic - Oliveraie EZZAYRA connue (Tier 1 cache)",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "url": { "raw": "{{base_url}}/api/diagnostic-anomalie", "host": ["{{base_url}}"], "path": ["api","diagnostic-anomalie"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"oliveraie\": {\n    \"id\": \"parcel_1777662049508_exj14\",\n    \"polygone\": {\n      \"type\": \"Polygon\",\n      \"coordinates\": [[[10.0078,36.445],[10.012,36.448],[10.013,36.443],[10.0078,36.445]]]\n    },\n    \"systeme\": \"intensif\"\n  },\n  \"date\": \"2024-09-30\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Diagnostic - Oliveraie INCONNUE (Tier 2 global)",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "url": { "raw": "{{base_url}}/api/diagnostic-anomalie", "host": ["{{base_url}}"], "path": ["api","diagnostic-anomalie"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"oliveraie\": {\n    \"id\": \"O_2026_307\",\n    \"polygone\": {\n      \"type\": \"Polygon\",\n      \"coordinates\": [[[9.20,35.20],[9.22,35.20],[9.22,35.22],[9.20,35.22],[9.20,35.20]]]\n    },\n    \"systeme\": \"intensif\"\n  },\n  \"date\": \"2024-09-30\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Diagnostic - Format EZZAYRA (coordinates lat/lng)",
+      "request": {
+        "method": "POST",
+        "header": [{"key":"Content-Type","value":"application/json"}],
+        "url": { "raw": "{{base_url}}/api/diagnostic-anomalie", "host": ["{{base_url}}"], "path": ["api","diagnostic-anomalie"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"oliveraie\": {\n    \"id\": \"TEST_LATLNG\",\n    \"coordinates\": [\n      {\"lat\": 35.20, \"lng\": 9.20},\n      {\"lat\": 35.22, \"lng\": 9.20},\n      {\"lat\": 35.22, \"lng\": 9.22},\n      {\"lat\": 35.20, \"lng\": 9.22}\n    ],\n    \"systeme\": \"extensif\"\n  },\n  \"date\": \"2024-09-30\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Diagnostic en cache pour une parcelle EZZAYRA (instant)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/diagnostic/cached/parcel_1777662049508_exj14",
+          "host": ["{{base_url}}"],
+          "path": ["api","diagnostic","cached","parcel_1777662049508_exj14"]
+        }
+      }
+    }
+  ]
+}
