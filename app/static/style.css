@@ -1,15 +1,16 @@
 :root {
-  --bg: #0e1116;
-  --panel: #161b22;
-  --panel-2: #1f262e;
-  --text: #e6edf3;
-  --muted: #8b949e;
-  --border: #30363d;
-  --accent: #4cc38a;
-  --vert: #3fb950;
-  --orange: #db7c1f;
-  --rouge: #f85149;
-  --gray: #6e7681;
+  /* Light theme aligned with HackTheHarvest visuals */
+  --bg: #f8fafc;           /* slate-50 */
+  --panel: #ffffff;        /* white cards */
+  --panel-2: #f1f5f9;      /* slate-100 */
+  --text: #0f172a;         /* slate-900 */
+  --muted: #64748b;        /* slate-500 */
+  --border: #e5e7eb;       /* gray-200 */
+  --accent: #10b981;       /* emerald-500 */
+  --vert: #16a34a;         /* green-600 */
+  --orange: #f59e0b;       /* amber-500 */
+  --rouge: #ef4444;        /* red-500 */
+  --gray: #94a3b8;         /* slate-400 */
 }
 
 * { box-sizing: border-box; }
@@ -27,14 +28,14 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
-  background: var(--panel);
+  padding: 14px 20px;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
   border-bottom: 1px solid var(--border);
 }
 .topbar__left h1 {
   margin: 0;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .subtitle {
   margin: 2px 0 0;
@@ -51,10 +52,10 @@ html, body {
   font-weight: 600;
   background: var(--panel-2);
 }
-.badge--vert   { background: rgba(63, 185, 80, 0.18);  color: var(--vert); }
-.badge--orange { background: rgba(219, 124, 31, 0.18); color: var(--orange); }
-.badge--rouge  { background: rgba(248, 81, 73, 0.18);  color: var(--rouge); }
-.badge--gray   { background: rgba(110, 118, 129, 0.20); color: var(--muted); }
+.badge--vert   { background: rgba(22, 163, 74, 0.12);  color: var(--vert); }
+.badge--orange { background: rgba(245, 158, 11, 0.12); color: var(--orange); }
+.badge--rouge  { background: rgba(239, 68, 68, 0.12);  color: var(--rouge); }
+.badge--gray   { background: rgba(100, 116, 139, 0.12); color: var(--muted); }
 
 .layout {
   display: grid;
@@ -93,7 +94,7 @@ html, body {
   background: var(--panel-2);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 6px 8px;
   font-size: 13px;
 }
@@ -102,16 +103,16 @@ html, body {
 .btn {
   display: inline-block;
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
   border: none;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
 }
-.btn--primary { background: var(--accent); color: #0e1116; }
-.btn--primary:hover { background: #5dd49b; }
+.btn--primary { background: var(--accent); color: #ffffff; box-shadow: 0 1px 2px rgba(16,185,129,0.25); }
+.btn--primary:hover { background: #0ea5a8; }
 .hint { font-size: 11px; color: var(--muted); margin-top: 6px; }
 
 .legend__row {
@@ -134,7 +135,7 @@ html, body {
 .dot--gray { background: var(--gray); }
 
 .map-wrap { position: relative; }
-#map { width: 100%; height: 100%; }
+#map { width: 100%; height: 100%; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
 
 .detail__empty {
   color: var(--muted);
@@ -164,7 +165,7 @@ html, body {
 .detail pre {
   background: var(--panel-2);
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 10px;
   overflow-x: auto;
   font-size: 11px;
   color: var(--muted);
@@ -173,7 +174,7 @@ html, body {
 .loading-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(14, 17, 22, 0.85);
+  background: rgba(15, 23, 42, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,7 +183,7 @@ html, body {
 .loading-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 24px 32px;
   text-align: center;
 }
