@@ -1,0 +1,31 @@
+services:
+  anomaly:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: anomaly-detection
+    restart: unless-stopped
+    environment:
+      # Point to the key INSIDE the container; map the host file to the same path via volumes
+      EE_SERVICE_ACCOUNT_KEY: ${EE_SERVICE_ACCOUNT_KEY:-/secrets/gee-key.json}
+      EE_PROJECT_ID: ${EE_PROJECT_ID:-}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports:
+      - "${PORT:-8000}:8000"
+    volumes:
+      # Persist app data and models; mount your host directories
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./history:/app/history
+      # Mount your GEE service account json (adjust host path or use .env)
+      - ${GEE_KEY_HOST_PATH:-./gee-key.json}:/secrets/gee-key.json:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:8000/api/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  default:
+    driver: bridge

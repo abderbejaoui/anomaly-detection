@@ -1,0 +1,15 @@
+.venv
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+history/
+data/*.db
+models/*.joblib
+gee-key.json
+*.parquet
+.DS_Store
+dist/
+node_modules/
