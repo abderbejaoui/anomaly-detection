@@ -18,6 +18,8 @@ dist/
 # Local data caches
 data/parcels.db
 data/parcels.db-journal
+data/parcels.db-shm
+data/parcels.db-wal
 history/
 models/*.joblib
 !models/.gitkeep
